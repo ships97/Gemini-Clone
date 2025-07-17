@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
   country: z.string().nonempty('Select a country'),
-  phone: z.string().min(8, 'Enter a valid phone number'),
+  phone: z.string().min(7, 'Phone number must be at least 7 digits').max(17, 'Phone number cannot exceed 17 digits'),
 });
 
 const AuthForm = () => {
@@ -23,13 +23,22 @@ const AuthForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors }, watch } = useForm({
+  const { register, handleSubmit, formState: { errors }, watch, setValue } = useForm({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     fetchCountries().then(setCountries);
   }, []);
+
+  const handlePhoneChange = (e) => {
+    const value = e.target.value;
+    // Remove any non-digit characters
+    const digitsOnly = value.replace(/\D/g, '');
+    // Limit to maximum 17 digits
+    const limitedDigits = digitsOnly.slice(0, 17);
+    setValue('phone', limitedDigits);
+  };
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -81,7 +90,16 @@ const AuthForm = () => {
           </div>
           <div className="mb-5">
             <label className="block mb-1 font-medium text-gray-700 dark:text-gray-200">Phone</label>
-            <input {...register('phone')} className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 p-2 rounded-lg focus:ring-2 focus:ring-blue-400" />
+            <input 
+              {...register('phone')} 
+              className="w-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-900 p-2 rounded-lg focus:ring-2 focus:ring-blue-400" 
+              type='tel'
+              inputMode='numeric'
+              pattern='[0-9]*'
+              onChange={handlePhoneChange}
+              placeholder="Enter phone number (7-17 digits)"
+              maxLength="17"
+            />
             {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
           </div>
           <button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-2 rounded-lg font-semibold shadow transition-all duration-200" disabled={loading}>
@@ -104,4 +122,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm; 
+export default AuthForm;
