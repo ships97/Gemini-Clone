@@ -1,0 +1,52 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f3f4f6;
+  color: #18181b;
+  transition: background 0.3s, color 0.3s;
+}
+
+.dark body {
+  background-color: #18181b;
+  color: #f3f4f6;
+}
+
+.dark .text-gray-900, .dark .text-black {
+  color: #f3f4f6 !important;
+}
+
+input, select, textarea, button {
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #2563eb33;
+}
+
+/* Fix input text color in dark mode */
+.dark input,
+.dark select,
+.dark textarea {
+  color: #e5e7eb;
+  background-color: #18181b;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s cubic-bezier(.4,0,.2,1);
+} 
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
