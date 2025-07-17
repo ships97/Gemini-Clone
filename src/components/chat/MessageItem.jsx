@@ -20,14 +20,6 @@ const MessageItem = ({ message, onDelete }) => {
           <span>{new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
           <CopyToClipboard text={message.text} />
         </div>
-        {/* <button
-          className="absolute top-2 right-2 text-red-400 hover:text-red-700 bg-white dark:bg-gray-800 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity text-xs border border-red-200 dark:border-red-700"
-          style={{zIndex: 10}}
-          onClick={() => onDelete(message.id)}
-          aria-label="Delete message"
-        >
-          ✕
-        </button> */}
       </div>
       {isUser && (
         <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center ml-2 text-white font-bold text-lg select-none">

@@ -18,31 +18,35 @@ const dummyMessages = Array.from({ length: 100 }, (_, i) => ({
 const ChatWindow = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const allMessages = dummyMessages; // Use all messages for pagination
+  const messages = useSelector((state) => state.chat.messages[id] || []);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [aiTyping, setAiTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // Calculate total pages
-  const totalPages = Math.ceil(allMessages.length / MESSAGES_PER_PAGE);
+  // On first load, if no messages, initialize with dummy messages
+  useEffect(() => {
+    if (!messages.length) {
+      dispatch(setMessages({ chatroomId: id, messages: dummyMessages }));
+    }
+    // eslint-disable-next-line
+  }, [id]);
 
-  // Get messages for current page
-  const paginatedMessages = allMessages.slice(
-    (page - 1) * MESSAGES_PER_PAGE,
-    page * MESSAGES_PER_PAGE
+  // Calculate total pages based on Redux messages
+  const totalPages = Math.max(1, Math.ceil(messages.length / MESSAGES_PER_PAGE));
+
+  // Get messages for current page (from Redux)
+  const paginatedMessages = messages.slice(
+    Math.max(0, messages.length - page * MESSAGES_PER_PAGE),
+    messages.length - (page - 1) * MESSAGES_PER_PAGE
   );
 
-  // Load messages for current page
+  // Simulate loading when page changes
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      dispatch(setMessages({ chatroomId: id, messages: paginatedMessages }));
-      setLoading(false);
-    }, 300);
-  }, [id, page, paginatedMessages, dispatch]);
-
-  const messages = useSelector((state) => state.chat.messages[id] || []);
+    const timer = setTimeout(() => setLoading(false), 300);
+    return () => clearTimeout(timer);
+  }, [page, messages.length]);
 
   // Auto-scroll to bottom on new message
   useEffect(() => {
@@ -95,7 +99,7 @@ const ChatWindow = () => {
       >
         <div ref={messagesEndRef} />
         {loading && <SkeletonLoader count={4} />}
-        {messages.slice().reverse().map(msg => (
+        {paginatedMessages.slice().reverse().map(msg => (
           <MessageItem key={msg.id} message={msg} onDelete={handleDeleteMessage} />
         ))}
       </div>
