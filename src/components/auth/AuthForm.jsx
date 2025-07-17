@@ -97,7 +97,7 @@ const AuthForm = () => {
               inputMode='numeric'
               pattern='[0-9]*'
               onChange={handlePhoneChange}
-              placeholder="Enter phone number (7-17 digits)"
+              placeholder="Enter phone number"
               maxLength="17"
             />
             {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
