@@ -6,7 +6,7 @@ A modern, responsive chat application inspired by Google Gemini, built with Reac
 
 ## 🚀 Live Demo
 
-[Live App Link](https://cloneegemini.netlify.app/auth) 
+[Live App Link](https://stirring-pastelito-e4ff0b.netlify.app/auth) 
 
 ---
 
