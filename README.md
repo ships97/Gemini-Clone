@@ -6,7 +6,7 @@ A modern, responsive chat application inspired by Google Gemini, built with Reac
 
 ## 🚀 Live Demo
 
-[Live App Link](https://your-live-link-here.com) <!-- Replace with your deployed URL -->
+[Live App Link](cloneegemini.netlify.app) 
 
 ---
 
@@ -26,8 +26,8 @@ This project is a frontend clone of the Gemini chat experience. It features:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/gemini-chat-clone.git
-   cd gemini-chat-clone
+   git clone https://github.com/ships97/Gemini-Clone.git
+   cd Gemini-Clone
    ```
 2. **Install dependencies:**
    ```bash
@@ -53,7 +53,6 @@ my-app/
 ├── public/                # Static assets
 ├── src/
 │   ├── app/               # Redux store setup
-│   ├── assets/            # Images, icons, etc.
 │   ├── components/
 │   │   ├── auth/          # AuthForm, OtpInput
 │   │   ├── chat/          # ChatRoomList, ChatRoomItem, ChatWindow, MessageInput, MessageItem, ImageUpload
@@ -96,7 +95,10 @@ my-app/
 
 ## 🖼️ Screenshots
 
-> _Add screenshots of the Dashboard, Chat Window, Auth Form, and Dark Mode here!_
+![Sign In/ Sign Up](image.png)
+![ChatRooms](image-1.png)
+![Chat Window with Gemini Clone](image-2.png)
+![Dark Theme](image-3.png)
 
 ---
 
@@ -109,6 +111,3 @@ my-app/
 
 ---
 
-## License
-
-MIT
