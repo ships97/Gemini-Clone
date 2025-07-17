@@ -105,7 +105,7 @@ my-app/
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [react-hook-form](https://react-hook-form.com/)
-- [zod](https://zod.dev/)
+- [zod](https://zod.dev/) 
 
 ---
 
